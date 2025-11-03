@@ -1,0 +1,616 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    background: #000000;
+  }
+
+  body {
+    @apply text-white antialiased;
+    font-family: "Inter", system-ui, sans-serif;
+    background: transparent;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Playfair Display", Georgia, serif;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .glass-effect {
+    @apply bg-white/5 backdrop-blur-md border border-white/10;
+  }
+
+  /* 导航栏专用的玻璃效果（无边框） */
+  .nav-glass {
+    @apply bg-white/5 backdrop-blur-md;
+  }
+
+  /* 科技感渐变玻璃卡片背景 */
+  .hero-surface {
+    /* 多层渐变叠加：顶部青色光晕 + 底部蓝色光晕 + 纵向深色渐变 */
+    background: radial-gradient(
+        1200px 1200px at 8% -10%,
+        rgba(34, 255, 214, 0.1),
+        transparent 45%
+      ),
+      radial-gradient(
+        900px 900px at 92% 120%,
+        rgba(0, 176, 255, 0.08),
+        transparent 40%
+      ),
+      linear-gradient(180deg, rgba(0, 8, 10, 0.65) 0%, rgba(0, 6, 8, 0.78) 100%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  /* 细网格叠加，增强科技感（很淡） */
+  .hero-grid {
+    background-image: linear-gradient(
+        rgba(255, 255, 255, 0.04) 1px,
+        transparent 1px
+      ),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 36px 36px, 36px 36px;
+    background-position: -1px -1px, -1px -1px;
+  }
+
+  /* 轻微流动高光条（动画极轻，不分散注意力） */
+  .hero-sheen {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.06),
+      transparent
+    );
+    mix-blend-mode: screen;
+    animation: hero-sheen-move 6s linear infinite;
+  }
+
+  @keyframes hero-sheen-move {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  .gradient-text {
+    background: linear-gradient(
+      135deg,
+      #ffffff 0%,
+      #e0e0e0 30%,
+      #ffffff 60%,
+      #c0c0c0 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    background-size: 200% 200%;
+    animation: shimmer 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.5))
+      drop-shadow(0 4px 10px rgba(0, 0, 0, 0.8));
+  }
+
+  @keyframes shimmer {
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+
+  /* 动态光晕效果 */
+  .glow {
+    animation: glow 2s ease-in-out infinite;
+  }
+
+  @keyframes glow {
+    0%,
+    100% {
+      box-shadow: 0 0 5px rgba(45, 212, 191, 0.5),
+        0 0 10px rgba(45, 212, 191, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 20px rgba(45, 212, 191, 0.8),
+        0 0 30px rgba(45, 212, 191, 0.5);
+    }
+  }
+
+  /* 脉冲动画 */
+  .pulse-slow {
+    animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulse-slow {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.8;
+      transform: scale(1.05);
+    }
+  }
+
+  /* 漂浮动画 */
+  .float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  /* 旋转光环 */
+  .rotate-ring {
+    animation: rotate-ring 10s linear infinite;
+  }
+
+  @keyframes rotate-ring {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* 波动边框 */
+  .animated-border {
+    position: relative;
+    background: linear-gradient(90deg, #14b8a6, #2dd4bf, #14b8a6);
+    background-size: 200% 100%;
+    animation: border-flow 3s ease infinite;
+  }
+
+  @keyframes border-flow {
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  /* 闪烁效果 */
+  .twinkle {
+    animation: twinkle 2s ease-in-out infinite;
+  }
+
+  @keyframes twinkle {
+    0%,
+    100% {
+      opacity: 0.3;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+  }
+
+  /* 霓虹灯光效果 */
+  .neon-glow {
+    animation: neon-glow 2s ease-in-out infinite;
+  }
+
+  @keyframes neon-glow {
+    0%,
+    100% {
+      text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #00f5ff,
+        0 0 70px #00f5ff, 0 0 80px #00f5ff, 0 0 100px #00f5ff, 0 0 150px #00f5ff;
+    }
+    50% {
+      text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #00f5ff,
+        0 0 35px #00f5ff, 0 0 40px #00f5ff, 0 0 50px #00f5ff, 0 0 75px #00f5ff;
+    }
+  }
+
+  /* 彩虹渐变动画 */
+  .rainbow-gradient {
+    background: linear-gradient(
+      90deg,
+      #ff0080,
+      #ff8c00,
+      #40e0d0,
+      #4169e1,
+      #9370db,
+      #ff1493
+    );
+    background-size: 200% 200%;
+    animation: rainbow 8s linear infinite;
+  }
+
+  @keyframes rainbow {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  /* 3D翻转效果 */
+  .flip-3d {
+    animation: flip-3d 6s ease-in-out infinite;
+  }
+
+  @keyframes flip-3d {
+    0%,
+    100% {
+      transform: rotateY(0deg) rotateX(0deg);
+    }
+    25% {
+      transform: rotateY(180deg) rotateX(0deg);
+    }
+    50% {
+      transform: rotateY(180deg) rotateX(180deg);
+    }
+    75% {
+      transform: rotateY(0deg) rotateX(180deg);
+    }
+  }
+
+  /* 波浪文字效果 */
+  .wave-text span {
+    display: inline-block;
+    animation: wave-text 2s ease-in-out infinite;
+  }
+
+  .wave-text span:nth-child(2) {
+    animation-delay: 0.1s;
+  }
+  .wave-text span:nth-child(3) {
+    animation-delay: 0.2s;
+  }
+  .wave-text span:nth-child(4) {
+    animation-delay: 0.3s;
+  }
+  .wave-text span:nth-child(5) {
+    animation-delay: 0.4s;
+  }
+
+  @keyframes wave-text {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  /* 脉冲光环 */
+  .pulse-ring {
+    animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulse-ring {
+    0% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(45, 212, 191, 0.7);
+    }
+    70% {
+      transform: scale(1);
+      box-shadow: 0 0 0 30px rgba(45, 212, 191, 0);
+    }
+    100% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(45, 212, 191, 0);
+    }
+  }
+
+  /* 渐变边框动画 */
+  .gradient-border {
+    position: relative;
+    background: linear-gradient(
+      90deg,
+      #ff006e,
+      #8338ec,
+      #3a86ff,
+      #06ffa5,
+      #ffbe0b
+    );
+    background-size: 400% 400%;
+    animation: gradient-border 8s ease infinite;
+    padding: 2px;
+    border-radius: 8px;
+  }
+
+  @keyframes gradient-border {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  /* 星光闪烁 */
+  .sparkle {
+    animation: sparkle 1.5s ease-in-out infinite;
+  }
+
+  @keyframes sparkle {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
+    }
+    50% {
+      opacity: 0.3;
+      transform: scale(0.8) rotate(180deg);
+    }
+  }
+
+  /* 呼吸光效 */
+  .breath-glow {
+    animation: breath-glow 3s ease-in-out infinite;
+  }
+
+  @keyframes breath-glow {
+    0%,
+    100% {
+      box-shadow: 0 0 20px rgba(45, 212, 191, 0.4),
+        0 0 40px rgba(45, 212, 191, 0.2);
+    }
+    50% {
+      box-shadow: 0 0 40px rgba(45, 212, 191, 0.8),
+        0 0 80px rgba(45, 212, 191, 0.4), 0 0 120px rgba(45, 212, 191, 0.2);
+    }
+  }
+
+  /* 滑入动画 */
+  .slide-in-left {
+    animation: slide-in-left 0.6s ease-out;
+  }
+
+  @keyframes slide-in-left {
+    from {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  .slide-in-right {
+    animation: slide-in-right 0.6s ease-out;
+  }
+
+  @keyframes slide-in-right {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* 高德地图样式 */
+  .amap-container {
+    font-family: 'Inter', system-ui, sans-serif !important;
+  }
+
+  /* 高德地图信息窗口样式 - 深色主题 */
+  .amap-info-content {
+    background: linear-gradient(135deg, rgba(13, 25, 36, 0.95), rgba(20, 35, 48, 0.95)) !important;
+    backdrop-filter: blur(16px) saturate(180%) !important;
+    border: 1px solid rgba(45, 212, 191, 0.2) !important;
+    border-radius: 16px !important;
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.8),
+      0 0 0 1px rgba(255, 255, 255, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+    padding: 4px !important;
+  }
+
+  /* 信息窗口内容 */
+  .custom-info-window {
+    padding: 12px 16px;
+    min-width: 200px;
+    background: transparent;
+  }
+
+  /* 信息窗口关闭按钮 */
+  .amap-info-close {
+    background: rgba(45, 212, 191, 0.2) !important;
+    border-radius: 50% !important;
+    color: #2dd4bf !important;
+    font-size: 18px !important;
+    width: 28px !important;
+    height: 28px !important;
+    line-height: 28px !important;
+    text-align: center !important;
+    top: 8px !important;
+    right: 8px !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .amap-info-close:hover {
+    background: rgba(45, 212, 191, 0.4) !important;
+    transform: rotate(90deg) !important;
+  }
+
+  /* 信息窗口底部尖角 */
+  .amap-info-sharp {
+    border-top-color: rgba(13, 25, 36, 0.95) !important;
+  }
+
+  /* 优化地图控件 */
+  .amap-logo {
+    opacity: 0.2 !important;
+    transition: opacity 0.3s !important;
+  }
+
+  .amap-logo:hover {
+    opacity: 0.5 !important;
+  }
+
+  .amap-copyright {
+    opacity: 0.2 !important;
+    font-size: 10px !important;
+    background: rgba(0, 0, 0, 0.3) !important;
+    backdrop-filter: blur(8px) !important;
+    padding: 2px 6px !important;
+    border-radius: 4px !important;
+  }
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2dd4bf;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #14b8a6;
+}
+
+/* 图片加载动画 */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.img-loading {
+  animation: shimmer 2s infinite;
+  background: linear-gradient(to right, #0a0a0a 4%, #1a1a1a 25%, #0a0a0a 36%);
+  background-size: 1000px 100%;
+}
+
+/* 鼠标悬停时的磁吸效果 */
+.magnetic-hover {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.magnetic-hover:hover {
+  transform: scale(1.05);
+}
+
+/* 多彩阴影 */
+.colorful-shadow {
+  box-shadow: 0 0 20px rgba(255, 0, 110, 0.3), 0 0 40px rgba(131, 56, 236, 0.2),
+    0 0 60px rgba(58, 134, 255, 0.1);
+}
+
+/* 文字渐变发光 */
+.text-glow {
+  text-shadow: 0 0 10px rgba(45, 212, 191, 0.8),
+    0 0 20px rgba(45, 212, 191, 0.6), 0 0 30px rgba(45, 212, 191, 0.4),
+    0 0 40px rgba(45, 212, 191, 0.2);
+}
+
+/* 极光脉冲动画 */
+.animate-aurora-pulse {
+  animation: aurora-pulse 6s ease-in-out infinite;
+}
+
+@keyframes aurora-pulse {
+  0%,
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 0.2;
+  }
+  50% {
+    transform: scale(1.2) translateY(-20px);
+    opacity: 0.4;
+  }
+}
+
+/* 底部极光流动 */
+.aurora-glow-bottom {
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(0, 184, 184, 0.1) 30%,
+    rgba(0, 255, 204, 0.15) 60%,
+    rgba(77, 255, 255, 0.2) 100%
+  );
+  animation: aurora-flow 10s ease-in-out infinite;
+}
+
+@keyframes aurora-flow {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-30px);
+  }
+}
+
+/* 极光波动 */
+.aurora-wave {
+  animation: aurora-wave 8s ease-in-out infinite;
+}
+
+@keyframes aurora-wave {
+  0%,
+  100% {
+    filter: brightness(1) hue-rotate(0deg);
+  }
+  33% {
+    filter: brightness(1.2) hue-rotate(10deg);
+  }
+  66% {
+    filter: brightness(0.9) hue-rotate(-10deg);
+  }
+}
